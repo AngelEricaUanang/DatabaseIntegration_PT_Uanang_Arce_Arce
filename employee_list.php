@@ -9,7 +9,6 @@
 <div class="container">
     <h2>Employee List</h2>
 
-    <!-- Search and Filter Form -->
     <form action="employee_list.php" method="GET">
         <input type="text" name="search" placeholder="Search by Employee ID or Name" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
         <select name="department">
@@ -37,7 +36,6 @@
         <button type="submit">Filter</button>
     </form>
 
-    <!-- Employee List Table -->
     <table>
         <thead>
             <tr>
@@ -50,13 +48,12 @@
         </thead>
         <tbody>
         <?php
-        // Database connection
+       
         $conn = new mysqli("localhost", "root", "", "DB_HRMS");
         if ($conn->connect_error) {
             die("<script>alert('Connection failed: " . $conn->connect_error . "');</script>");
         }
 
-        // SQL Query with optional search and filters
         $whereClauses = [];
         if (!empty($_GET['search'])) {
             $search = $conn->real_escape_string($_GET['search']);
@@ -98,7 +95,6 @@
                 echo "<td>$department</td>";
                 echo "<td>$position</td>";
 
-                // Ensure ID exists before displaying actions
                 if (!empty($employee_id)) {
                     echo "<td>
                             <a href='employee_profile.php?id=$employee_id'>View Profile</a> | 
