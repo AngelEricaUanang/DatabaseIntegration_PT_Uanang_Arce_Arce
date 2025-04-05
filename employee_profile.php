@@ -1,11 +1,10 @@
 <?php
-// Database connection
+
 $conn = new mysqli("localhost", "root", "", "DB_HRMS");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if employee ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     die("Invalid Employee ID.");
 }
