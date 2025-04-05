@@ -1,18 +1,16 @@
 <?php
-// Database connection
+
 $conn = new mysqli("localhost", "root", "", "DB_HRMS");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if employee ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     die("Invalid Employee ID.");
 }
 
 $employee_id = $conn->real_escape_string($_GET['id']);
 
-// Fetch employee details
 $sql = "SELECT * FROM employees WHERE id = '$employee_id'";
 $result = $conn->query($sql);
 
@@ -22,7 +20,6 @@ if ($result->num_rows == 0) {
 
 $employee = $result->fetch_assoc();
 
-// Update employee details
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = $conn->real_escape_string($_POST['first_name']);
     $last_name = $conn->real_escape_string($_POST['last_name']);
