@@ -14,7 +14,6 @@
         <input type="text" name="middle_name" placeholder="Middle Name">
         <input type="date" name="date_of_birth" required>
 
-        <!-- Gender -->
      <div class="gender-container" required>
        <label>Gender:</label><br>
        <label><input type="radio" name="gender" value="Male"> Male</label>
@@ -48,13 +47,12 @@
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    // Database connection
+   
     $conn = new mysqli("localhost", "root", "", "DB_HRMS");
     if ($conn->connect_error) {
         die("<script>alert('Connection failed: " . $conn->connect_error . "');</script>");
     }
 
-    // Collect data
     $last_name = $_POST['last_name'];
     $first_name = $_POST['first_name'];
     $middle_name = $_POST['middle_name'];
@@ -69,7 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $status = $_POST['status'];
     $date_hired = $_POST['date_hired'];
 
-    // Prepare insert
     $stmt = $conn->prepare("INSERT INTO employees 
         (last_name, first_name, middle_name, date_of_birth, gender, home_address, contact_number, email, department, position, employment_type, status, date_hired)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
